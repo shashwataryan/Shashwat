@@ -1,0 +1,110 @@
+<html>
+    <head>
+       
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <style>
+         input[type=text], input[type=password], input[type=email]
+            {
+              padding:8px;
+              display: flex;
+              margin:5px auto 5px;
+              border: outset 1px solid #ccc;
+            }
+            button
+            {
+                width:85%;
+                display:flex;
+                cursor: pointer;
+                background-color: background;
+                color: white;
+                padding: 10px 16px;
+                border:none;
+                justify-content:center;
+                margin:auto ;
+                box-sizing: border-box;
+            }
+            button:hover
+            {
+                opacity:0.8;
+            }
+        </style>
+        <div>
+            <img src="download.png" style="display:flex;margin:auto;width:50%;height:100px;">
+            <br>
+            
+                               
+                    <div class="container1">
+                   <form name="myForm" method="post">
+
+                    <h4 style="font-size:10px;">Sign Up</h4>
+                    
+                    <h3 style="font-size:25px;">Create your account</h3>
+                    <p>Lorem ipsum dolor sit amet,consectetur adipiscing alit</p>
+                                        <button onclick="signInWithGoogle()" type="button" class="btn btn-primary">Sign In with Google</button>
+
+                   ----------------------------------------or-------------------------------------------
+                   <input type="text" placeholder="Firstname" name="firstname" required style="margin:auto;width:80%;height:30px;margin-top:5px;">
+             
+                   <input type="text" placeholder="Lastname" name="lastname" required style="margin:auto;width:80%;height:30px;margin-top:5px;">
+               
+                   <input type="email" placeholder="Email" name="emaiid" required style="margin:auto;width:80%;height:30px;margin-top:5px;">
+               
+                   <input type="password" placeholder="Password" name="password" required style="margin:auto;width:80%;height:30px;margin-top:5px;">
+                   <br>
+                   <p style="font-size:10px;">
+                       By clicking Sign Up,you agree to our <span><a href="#" style="text-decoration: none;">Terms of Use</a></span> and our <span>
+                           <a href="#" style="text-decoration:none">Privacy policy</a></span>
+                   </p>
+                   <button method="post" type="Submit" style="text-align: center;">Sign Up</button>
+                              </div>
+    <script src="https://www.gstatic.com/firebasejs/7.21.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.21.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.21.1/firebase-analytics.js"></script>
+
+    <script>
+
+        var firebaseConfig = {
+            apiKey: "AIzaSyCQ1pNpiWHCcnQfU1KfY9KTJX1Q_35ZFjQ",
+            authDomain: "wired-archery-274511.firebaseapp.com",
+            databaseURL: "https://wired-archery-274511.firebaseio.com",
+            projectId: "wired-archery-274511",
+            storageBucket: "wired-archery-274511.appspot.com",
+            messagingSenderId: "619237718979",
+            appId: "1:619237718979:web:e31f82d7122f0a09325b76",
+            measurementId: "G-EQZ7DKTP7F"
+        };
+
+        firebase.initializeApp(firebaseConfig);
+        firebase.analytics();
+
+        var provider = new firebase.auth.GoogleAuthProvider();
+
+        function signInWithGoogle(){
+            console.log("called")
+            firebase.auth().signInWithPopup(provider).then(function(result) {
+                // This gives you a Google Access Token. You can use it to access the Google API.
+                var token = result.credential.accessToken;
+                // The signed-in user info.
+                var user = result.user;
+                console.log(user);
+                // ...
+            }).catch(function(error) {
+                // Handle Errors here.
+                    var errorCode = error.code;
+                    var errorMessage = error.message;
+                    // The email of the user's account used.
+                    var email = error.email;
+                    console.log(error)
+                    // The firebase.auth.AuthCredential type that was used.
+                    var credential = error.credential;
+                // ...
+            });
+        }
+
+    </script>
+
+</html>
